@@ -23,3 +23,27 @@ div.medications_container { padding-left: 13.8em !important; }
 table.medications { margin-bottom: 10px; }
 table.medications th { padding: 10px; border: 1px solid #999; width: 8em; }
 table.medications td { padding: 10px; border: 1px solid #999; }
+
+.reading_row { margin-bottom: 10px; }
+.reading_row .data_type select { width: 12em; }
+.reading_row .reading_type select { width: 12em; }
+.reading_row span { margin-left: 10px; }
+.reading_row label { display: inline-block; width: 4em; }
+
+.anaesthesia_grid { background: #fff; }
+.anaesthesia_grid th { border: 1px solid #000; width: 102px; color: #000 !important; background-color: #ccc; padding: 2px 10px 2px 10px !important; text-align: left; font-size: 11px; vertical-align: middle; }
+.anaesthesia_grid td { border: 1px solid #000; width: 4.2em; height: 1em; text-align: center; padding: 2px 10px 2px 10px !important; vertical-align: middle; }
+.anaesthesia_grid input { background: #fff; border: none; }
+
+.anaesthesia_grid tr.times td { border: none; font-size: 11px; }
+.anaesthesia_grid tr.times span { margin-right: -69px; }
+
+span.unit { margin-left: 0; }
+
+#ed_canvas_edit_Grid { margin-left: 0.5em; }
+
+.eyedraw_grid { margin-top: 2em; }
+.grid_numbers { float: left; }
+.grid_numbers div { margin-left: 7.5em; margin-top: 0.51em; }
+
+.OphCiPostoperativenotes_extra_label { margin-left: 1em; display: inline-block; font-size: 15px; }

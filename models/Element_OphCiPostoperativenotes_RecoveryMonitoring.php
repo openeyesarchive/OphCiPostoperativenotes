@@ -21,31 +21,16 @@
  * This is the model class for table "et_ophcipostoperativenotes_recovery_monitoring".
  *
  * The followings are the available columns in table:
- * @property string $id
- * @property integer $event_id
- * @property integer $heart_rate
- * @property string $blood_pressure
- * @property integer $rr
- * @property integer $sao2
- * @property string $o2_lmin
- * @property string $temp
- * @property integer $pain_score
- * @property string $nausea_vomiting
- * @property string $blood_loss
- * @property string $mews_score
- *
- * The followings are the available model relations:
- *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
- * @property User $user
- * @property User $usermodified
+ * @property integer $id
+ * @property time $anaesthesia_start_time
+ * @property time $anaesthesia_end_time
+ * @property time $surgery_start_time
+ * @property time $surgery_end_time
  */
 
 class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeElement
 {
-	public $service;
+	public $intervals = 8;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -72,11 +57,12 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, heart_rate, blood_pressure, rr, sao2, o2_lmin, temp, pain_score, nausea_vomiting, blood_loss, mews_score, ', 'safe'),
-			array('heart_rate, blood_pressure, rr, sao2, o2_lmin, temp, pain_score, nausea_vomiting, blood_loss, mews_score, ', 'required'),
+			array('event_id, anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'safe'),
+			array('anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, heart_rate, blood_pressure, rr, sao2, o2_lmin, temp, pain_score, nausea_vomiting, blood_loss, mews_score, ', 'safe', 'on' => 'search'),
+			array('id, event_id, anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'safe', 'on' => 'search'),
+			array('readings', 'OneOf', 'drugs', 'readings'),
 		);
 	}
 
@@ -93,6 +79,8 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'drugs' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Drug_Dose', 'element_id', 'order' => 'display_order'),
+			'readings' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Reading', 'element_id', 'order' => 'display_order'),
 		);
 	}
 
@@ -104,16 +92,10 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'heart_rate' => 'Heart rate',
-			'blood_pressure' => 'Blood pressure',
-			'rr' => 'RR',
-			'sao2' => 'SaO2',
-			'o2_lmin' => 'O2 L min',
-			'temp' => 'Temp oC oF',
-			'pain_score' => 'Pain score',
-			'nausea_vomiting' => 'Nausea vomiting',
-			'blood_loss' => 'Blood loss',
-			'mews_score' => 'MEWS score',
+			'anaesthesia_start_time' => 'Anaesthesia start time',
+			'anaesthesia_end_time' => 'End time',
+			'surgery_start_time' => 'Surgery start time',
+			'surgery_end_time' => 'End time',
 		);
 	}
 
@@ -130,38 +112,87 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('heart_rate', $this->heart_rate);
-		$criteria->compare('blood_pressure', $this->blood_pressure);
-		$criteria->compare('rr', $this->rr);
-		$criteria->compare('sao2', $this->sao2);
-		$criteria->compare('o2_lmin', $this->o2_lmin);
-		$criteria->compare('temp', $this->temp);
-		$criteria->compare('pain_score', $this->pain_score);
-		$criteria->compare('nausea_vomiting', $this->nausea_vomiting);
-		$criteria->compare('blood_loss', $this->blood_loss);
-		$criteria->compare('mews_score', $this->mews_score);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
 	}
 
-
-
-	protected function beforeSave()
+	public function setDefaultOptions()
 	{
-		return parent::beforeSave();
+		$ts = time();
+
+		while (date('i',$ts) != '00' && date('i',$ts) != '30') {
+			$ts -= 60;
+		}
+
+		$this->anaesthesia_start_time = date('H:i',$ts);
 	}
 
-	protected function afterSave()
-	{
+	public function getItems() {
+		$items = array();
 
-		return parent::afterSave();
+		foreach (OphCiPostoperativenotes_Gas_Level::model()->findAll(array('condition'=>'element_id=?','params'=>array($this->id),'order'=>'display_order')) as $level) {
+			$items[$level->display_order] = $level;
+		}
+
+		foreach (OphCiPostoperativenotes_Reading::model()->findAll(array('condition'=>'element_id=?','params'=>array($this->id),'order'=>'display_order')) as $reading) {
+			$items[$reading->display_order] = $reading;
+		}
+
+		foreach (OphCiPostoperativenotes_Drug_Dose::model()->findAll(array('condition'=>'element_id=?','params'=>array($this->id),'order'=>'display_order')) as $dose) {
+			$items[$dose->display_order] = $dose;
+		}
+
+		ksort($items);
+
+		return $items;
 	}
 
-	protected function beforeValidate()
+	public function OneOf($attribute, $params)
 	{
-		return parent::beforeValidate();
+		$valid = false;
+
+		foreach ($params as $param) {
+			if ($this->$param) {
+				$valid = true;
+				break;
+			}
+		}
+
+		if ($valid === false) {
+			$this->addError($attribute, 'You must enter at least one drug or reading');
+		}
+	}
+
+	public function getStartTimeTS()
+	{
+		if (!empty($_POST)) {
+			preg_match('/^([0-9]+)\:([0-9]+)/',$_POST['Element_OphCiPostoperativenotes_RecoveryMonitoring']['anaesthesia_start_time'],$m);
+		} else {
+			preg_match('/^([0-9]+)\:([0-9]+)/',$this->anaesthesia_start_time,$m);
+		}
+
+		return mktime($m[1],$m[2],0,1,1,2012);
+	}
+
+	public function getTimeIntervals()
+	{
+		$times = array();
+
+		for ($i=0; $i<=$this->intervals; $i++) {
+			$times[] = date('H:i',($this->startTimeTS + ($i * 15 * 60)));
+		}
+
+		return $times;
+	}
+
+	protected function afterFind()
+	{
+		$this->anaesthesia_start_time = substr($this->anaesthesia_start_time,0,5);
+		$this->anaesthesia_end_time = substr($this->anaesthesia_end_time,0,5);
+		$this->surgery_start_time = substr($this->surgery_start_time,0,5);
+		$this->surgery_end_time = substr($this->surgery_end_time,0,5);
 	}
 }
 ?>

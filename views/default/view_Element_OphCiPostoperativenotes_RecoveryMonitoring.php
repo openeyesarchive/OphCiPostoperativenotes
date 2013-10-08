@@ -20,47 +20,31 @@
 
 <h4 class="elementTypeName"><?php echo $element->elementType->name?></h4>
 
+<style type="text/css">
+	td { vertical-align: middle; }
+</style>
+
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('heart_rate'))?></td>
-			<td><span class="big"><?php echo $element->heart_rate?></span></td>
+			<td colspan="2" style="background: #fff">
+				<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'view'))?>
+			</td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('blood_pressure'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->blood_pressure)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('rr'))?></td>
-			<td><span class="big"><?php echo $element->rr?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('sao2'))?></td>
-			<td><span class="big"><?php echo $element->sao2?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('o2_lmin'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->o2_lmin)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('temp'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->temp)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('pain_score'))?></td>
-			<td><span class="big"><?php echo $element->pain_score?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('nausea_vomiting'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->nausea_vomiting)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('blood_loss'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->blood_loss)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('mews_score'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->mews_score)?></span></td>
+			<td colspan="2">
+				<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_start_time'))?>:
+				<span class="big"><?php echo CHtml::encode(substr($element->anaesthesia_start_time,0,5))?></span>
+				&nbsp;&nbsp;&nbsp;
+				<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_end_time'))?>:
+				<span class="big"><?php echo CHtml::encode(substr($element->anaesthesia_end_time,0,5))?></span>
+				&nbsp;&nbsp;&nbsp;
+				<?php echo CHtml::encode($element->getAttributeLabel('surgery_start_time'))?>:
+				<span class="big"><?php echo CHtml::encode(substr($element->surgery_start_time,0,5))?></span>
+				&nbsp;&nbsp;&nbsp;
+				<?php echo CHtml::encode($element->getAttributeLabel('surgery_end_time'))?>:
+				<span class="big"><?php echo CHtml::encode(substr($element->surgery_end_time,0,5))?></span>
+			</td>
 		</tr>
 	</tbody>
 </table>
