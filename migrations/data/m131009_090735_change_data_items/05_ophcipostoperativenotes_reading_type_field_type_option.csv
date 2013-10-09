@@ -1,0 +1,7 @@
+id,reading_type_id,name,display_order
+1,4,SR,1
+2,4,AF,2
+3,10,Superior,1
+4,10,Temporal,2
+5,10,Inferior,3
+6,10,Nasal,4

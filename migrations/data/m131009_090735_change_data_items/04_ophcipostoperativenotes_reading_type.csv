@@ -1,0 +1,11 @@
+id,name,display_order,unit,validation_regex,validation_message,field_type_id
+1,Heart rate,1,bpm,,,3
+2,Blood pressure,2,,/^[0-9]+\/[0-9]+$/,Must be in the format: 110/70,5
+3,RR,1,bpm,,,3
+4,ECG Rhythm,3,,,,2
+5,SaO2,4,%,,,1
+6,O2,5,L/min,,,3
+7,Blood sugar,6,%,,,1
+8,Temp,7,C,,,4
+9,PNS,8,,,,3
+10,Position,9,,,,2
