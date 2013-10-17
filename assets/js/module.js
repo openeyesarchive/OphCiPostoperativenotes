@@ -157,6 +157,39 @@ $(document).ready(function() {
 			n += 1;
 		}
 	});
+
+	$('#Element_OphCiPostoperativenotes_RecoveryMonitoring_entered_recovery_time').change(function(e) {
+		var m = $(this).val().match(/^([0-9]{1,2}):([0-9]{2})$/);
+
+		if (m) {
+			if (m[1].length == 0) {
+				m[1] = "0"+m[1];
+			}
+
+			var d = new Date("2013-01-01 "+m[1]+":"+m[2]+":00");
+
+			var ts = d.getTime() / 1000;
+
+			for (var i=0; i<9; i++) {
+				var d = new Date(ts * 1000);
+
+				ts += (15 * 60);
+
+				var hours = String(d.getHours());
+				if (hours.length <2) {
+					hours = "0"+hours;
+				}
+				var mins = String(d.getMinutes());
+				if (mins.length <2) {
+					mins = "0"+mins;
+				}
+
+				var timeString = hours + ":" + mins;
+
+				$('tr.times td:nth-child('+(i+1)+') span').text(timeString);
+			}
+		}
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

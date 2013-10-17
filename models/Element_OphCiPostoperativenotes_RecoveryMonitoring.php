@@ -22,10 +22,6 @@
  *
  * The followings are the available columns in table:
  * @property integer $id
- * @property time $anaesthesia_start_time
- * @property time $anaesthesia_end_time
- * @property time $surgery_start_time
- * @property time $surgery_end_time
  */
 
 class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeElement
@@ -57,11 +53,11 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'safe'),
-			array('anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'required'),
+			array('event_id, entered_recovery_time', 'safe'),
+			array('entered_recovery_time', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'safe', 'on' => 'search'),
+			array('id, event_id', 'safe', 'on' => 'search'),
 			array('readings', 'OneOf', 'drugs', 'readings'),
 		);
 	}
@@ -92,10 +88,7 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'anaesthesia_start_time' => 'Anaesthesia start time',
-			'anaesthesia_end_time' => 'End time',
-			'surgery_start_time' => 'Surgery start time',
-			'surgery_end_time' => 'End time',
+			'entered_recovery_time' => 'Entered recovery time',
 		);
 	}
 
@@ -120,13 +113,18 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 
 	public function setDefaultOptions()
 	{
+		$this->entered_recovery_time = $this->defaultRecoveryTime;
+	}
+
+	public function getDefaultRecoveryTime()
+	{
 		$ts = time();
 
 		while (date('i',$ts) != '00' && date('i',$ts) != '30') {
 			$ts -= 60;
 		}
 
-		$this->anaesthesia_start_time = date('H:i',$ts);
+		return date('H:i',$ts);
 	}
 
 	public function getItems() {
@@ -168,9 +166,13 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 	public function getStartTimeTS()
 	{
 		if (!empty($_POST)) {
-			preg_match('/^([0-9]+)\:([0-9]+)/',$_POST['Element_OphCiPostoperativenotes_RecoveryMonitoring']['anaesthesia_start_time'],$m);
+			if (!preg_match('/^([0-9]+)\:([0-9]+)/',$_POST['Element_OphCiPostoperativenotes_RecoveryMonitoring']['entered_recovery_time'],$m)) {
+				return $this->defaultRecoveryTime;
+			}
 		} else {
-			preg_match('/^([0-9]+)\:([0-9]+)/',$this->anaesthesia_start_time,$m);
+			if (!preg_match('/^([0-9]+)\:([0-9]+)/',$this->entered_recovery_time,$m)) {
+				return $this->defaultRecoveryTime;
+			}
 		}
 
 		return mktime($m[1],$m[2],0,1,1,2012);
@@ -189,10 +191,16 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 
 	protected function afterFind()
 	{
-		$this->anaesthesia_start_time = substr($this->anaesthesia_start_time,0,5);
-		$this->anaesthesia_end_time = substr($this->anaesthesia_end_time,0,5);
-		$this->surgery_start_time = substr($this->surgery_start_time,0,5);
-		$this->surgery_end_time = substr($this->surgery_end_time,0,5);
+		$this->entered_recovery_time = substr($this->entered_recovery_time,0,5);
+	}
+
+	protected function beforeValidate()
+	{
+		if (!preg_match('/^[0-9]{1,2}:[0-9]{2}$/',$this->entered_recovery_time)) {
+			$this->addError('entered_recovery_time','Entered recovery time is invalid');
+		}
+
+		return parent::beforeValidate();
 	}
 }
 ?>

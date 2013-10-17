@@ -25,31 +25,14 @@
 	data-element-display-order="<?php echo $element->elementType->display_order?>">
 	<h4 class="elementTypeName"><?php echo $element->elementType->name; ?></h4>
 
+	<?php echo $form->textField($element,'entered_recovery_time',array('size'=>6))?>
+
 	<div id="div_Element_OphCiPostoperativenotes_Readings" class="eventDetail">
 		<div class="label">Data items:</div>
 		<div class="data">
 			<div id="items">
 				<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'edit'))?>
 			</div>
-		</div>
-	</div>
-
-	<div id="div_Element_OphCiPostoperativenotes_Readings_anaesthesia_start_time" class="eventDetail">
-		<div class="label"><?php echo $element->getAttributeLabel('anaesthesia_start_time')?>:</div>
-		<div class="data">
-			<?php echo $form->textField($element,'anaesthesia_start_time',array('size'=>6,'nowrapper'=>true))?>
-			<div class="OphCiPostoperativenotes_extra_label">
-				<?php echo $element->getAttributeLabel('anaesthesia_end_time')?>:
-			</div>
-			<?php echo $form->textField($element,'anaesthesia_end_time',array('size'=>6,'nowrapper'=>true))?>
-			<div class="OphCiPostoperativenotes_extra_label">
-				<?php echo $element->getAttributeLabel('surgery_start_time')?>:
-			</div>
-			<?php echo $form->textField($element,'surgery_start_time',array('size'=>6,'nowrapper'=>true))?>
-			<div class="OphCiPostoperativenotes_extra_label">
-				<?php echo $element->getAttributeLabel('surgery_end_time')?>:
-			</div>
-			<?php echo $form->textField($element,'surgery_end_time',array('size'=>6,'nowrapper'=>true))?>
 		</div>
 	</div>
 </div>

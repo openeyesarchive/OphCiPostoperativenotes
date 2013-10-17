@@ -27,23 +27,12 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td colspan="2" style="background: #fff">
-				<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'view'))?>
-			</td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('entered_recovery_time'))?>:</td>
+			<td><span class="big"><?php echo CHtml::encode($element->entered_recovery_time)?></span></td>
 		</tr>
 		<tr>
-			<td colspan="2">
-				<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_start_time'))?>:
-				<span class="big"><?php echo CHtml::encode(substr($element->anaesthesia_start_time,0,5))?></span>
-				&nbsp;&nbsp;&nbsp;
-				<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_end_time'))?>:
-				<span class="big"><?php echo CHtml::encode(substr($element->anaesthesia_end_time,0,5))?></span>
-				&nbsp;&nbsp;&nbsp;
-				<?php echo CHtml::encode($element->getAttributeLabel('surgery_start_time'))?>:
-				<span class="big"><?php echo CHtml::encode(substr($element->surgery_start_time,0,5))?></span>
-				&nbsp;&nbsp;&nbsp;
-				<?php echo CHtml::encode($element->getAttributeLabel('surgery_end_time'))?>:
-				<span class="big"><?php echo CHtml::encode(substr($element->surgery_end_time,0,5))?></span>
+			<td colspan="2" style="background: #fff">
+				<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'view'))?>
 			</td>
 		</tr>
 	</tbody>
