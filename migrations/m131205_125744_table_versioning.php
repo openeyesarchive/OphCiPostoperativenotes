@@ -533,36 +533,21 @@ CREATE TABLE `ophcipostoperativenotes_reading_type_field_type_option_version` (
 	public function down()
 	{
 		$this->dropColumn('ophcipostoperativenotes_drug','deleted');
-		$this->dropColumn('ophcipostoperativenotes_drug_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_drug_dose','deleted');
-		$this->dropColumn('ophcipostoperativenotes_drug_dose_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_gas','deleted');
-		$this->dropColumn('ophcipostoperativenotes_gas_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_gas_field_type','deleted');
-		$this->dropColumn('ophcipostoperativenotes_gas_field_type_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_gas_level','deleted');
-		$this->dropColumn('ophcipostoperativenotes_gas_level_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_medication','deleted');
-		$this->dropColumn('ophcipostoperativenotes_medication_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_medication_item','deleted');
-		$this->dropColumn('ophcipostoperativenotes_medication_item_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_reading','deleted');
-		$this->dropColumn('ophcipostoperativenotes_reading_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_reading_type','deleted');
-		$this->dropColumn('ophcipostoperativenotes_reading_type_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_reading_type_field_type','deleted');
-		$this->dropColumn('ophcipostoperativenotes_reading_type_field_type_version','deleted');
 		$this->dropColumn('ophcipostoperativenotes_reading_type_field_type_option','deleted');
-		$this->dropColumn('ophcipostoperativenotes_reading_type_field_type_option_version','deleted');
 
 		$this->dropColumn('et_ophcipostoperativenotes_medications','deleted');
-		$this->dropColumn('et_ophcipostoperativenotes_medications_version','deleted');
 		$this->dropColumn('et_ophcipostoperativenotes_postop_notes','deleted');
-		$this->dropColumn('et_ophcipostoperativenotes_postop_notes_version','deleted');
 		$this->dropColumn('et_ophcipostoperativenotes_postop_progress_notes','deleted');
-		$this->dropColumn('et_ophcipostoperativenotes_postop_progress_notes_version','deleted');
 		$this->dropColumn('et_ophcipostoperativenotes_recovery_monitoring','deleted');
-		$this->dropColumn('et_ophcipostoperativenotes_recovery_monitoring_version','deleted');
 
 		$this->dropTable('et_ophcipostoperativenotes_medications_version');
 		$this->dropTable('et_ophcipostoperativenotes_postop_notes_version');
