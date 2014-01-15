@@ -54,21 +54,21 @@ class m130930_075153_event_type_OphCiPostoperativenotes extends CDbMigration
 				'CONSTRAINT `et_ophcipostoperativenotes_postop_notes_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_postop_notes_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_postop_notes_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci');
 
 		$this->createTable('et_ophcipostoperativenotes_recovery_monitoring', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'event_id' => 'int(10) unsigned NOT NULL',
 				'heart_rate' => 'int(10) unsigned NOT NULL',
-				'blood_pressure' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
+				'blood_pressure' => 'varchar(255) DEFAULT \'\'',
 				'rr' => 'int(10) unsigned NOT NULL',
 				'sao2' => 'int(10) unsigned NOT NULL',
-				'o2_lmin' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-				'temp' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
+				'o2_lmin' => 'varchar(255) DEFAULT \'\'',
+				'temp' => 'varchar(255) DEFAULT \'\'',
 				'pain_score' => 'int(10) unsigned NOT NULL',
-				'nausea_vomiting' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-				'blood_loss' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-				'mews_score' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
+				'nausea_vomiting' => 'varchar(255) DEFAULT \'\'',
+				'blood_loss' => 'varchar(255) DEFAULT \'\'',
+				'mews_score' => 'varchar(255) DEFAULT \'\'',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -80,12 +80,12 @@ class m130930_075153_event_type_OphCiPostoperativenotes extends CDbMigration
 				'CONSTRAINT `et_ophcipostoperativenotes_recovery_monitoring_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_recovery_monitoring_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_recovery_monitoring_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci');
 
 		$this->createTable('et_ophcipostoperativenotes_postop_progress_notes', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'event_id' => 'int(10) unsigned NOT NULL',
-				'text' => 'text COLLATE utf8_bin DEFAULT \'\'',
+				'text' => 'text DEFAULT \'\'',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -97,7 +97,7 @@ class m130930_075153_event_type_OphCiPostoperativenotes extends CDbMigration
 				'CONSTRAINT `et_ophcipostoperativenotes_postop_progress_notes_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_postop_progress_notes_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_postop_progress_notes_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci');
 
 		$this->createTable('et_ophcipostoperativenotes_medications', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
@@ -113,11 +113,11 @@ class m130930_075153_event_type_OphCiPostoperativenotes extends CDbMigration
 				'CONSTRAINT `et_ophcipostoperativenotes_medications_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_medications_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophcipostoperativenotes_medications_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci');
 
 		$this->createTable('ophcipostoperativenotes_medication', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'name' => 'varchar(64) COLLATE utf8_bin NOT NULL',
+				'name' => 'varchar(64) NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
@@ -128,7 +128,7 @@ class m130930_075153_event_type_OphCiPostoperativenotes extends CDbMigration
 				'KEY `ophcipostoperativenotes_medication_cui_fk` (`created_user_id`)',
 				'CONSTRAINT `ophcipostoperativenotes_medication_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `ophcipostoperativenotes_medication_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci');
 
 		$this->insert('ophcipostoperativenotes_medication',array('name'=>'Acetaminophen','display_order'=>1));
 		$this->insert('ophcipostoperativenotes_medication',array('name'=>'Ibuprofen','display_order'=>2));
@@ -139,9 +139,9 @@ class m130930_075153_event_type_OphCiPostoperativenotes extends CDbMigration
 				'element_id' => 'int(10) unsigned NOT NULL',
 				'medication_id' => 'int(10) unsigned NOT NULL',
 				'time' => 'time NOT NULL',
-				'dose' => 'varchar(64) COLLATE utf8_bin NOT NULL',
-				'route' => 'varchar(64) COLLATE utf8_bin NOT NULL',
-				'given_by' => 'varchar(64) COLLATE utf8_bin NOT NULL',
+				'dose' => 'varchar(64) NOT NULL',
+				'route' => 'varchar(64) NOT NULL',
+				'given_by' => 'varchar(64) NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
@@ -156,7 +156,7 @@ class m130930_075153_event_type_OphCiPostoperativenotes extends CDbMigration
 				'CONSTRAINT `ophcipostoperativenotes_medication_item_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `ophcipostoperativenotes_medication_item_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_medications` (`id`)',
 				'CONSTRAINT `ophcipostoperativenotes_medication_item_med_fk` FOREIGN KEY (`medication_id`) REFERENCES `ophcipostoperativenotes_medication` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci');
 	}
 
 	public function down()
