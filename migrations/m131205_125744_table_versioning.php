@@ -19,7 +19,7 @@ CREATE TABLE `et_ophcipostoperativenotes_medications_version` (
 	CONSTRAINT `acv_et_ophcipostoperativenotes_medications_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_medications_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_medications_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophcipostoperativenotes_medications_version','id','int(10) unsigned NOT NULL');
@@ -57,7 +57,7 @@ CREATE TABLE `et_ophcipostoperativenotes_postop_notes_version` (
 	CONSTRAINT `acv_et_ophcipostoperativenotes_postop_notes_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_postop_notes_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_postop_notes_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophcipostoperativenotes_postop_notes_version','id','int(10) unsigned NOT NULL');
@@ -76,7 +76,7 @@ CREATE TABLE `et_ophcipostoperativenotes_postop_notes_version` (
 CREATE TABLE `et_ophcipostoperativenotes_postop_progress_notes_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`event_id` int(10) unsigned NOT NULL,
-	`text` text COLLATE utf8_bin,
+	`text` text,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
 	`created_user_id` int(10) unsigned NOT NULL DEFAULT '1',
@@ -88,7 +88,7 @@ CREATE TABLE `et_ophcipostoperativenotes_postop_progress_notes_version` (
 	CONSTRAINT `acv_et_ophcipostoperativenotes_postop_progress_notes_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_postop_progress_notes_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_postop_progress_notes_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophcipostoperativenotes_postop_progress_notes_version','id','int(10) unsigned NOT NULL');
@@ -119,7 +119,7 @@ CREATE TABLE `et_ophcipostoperativenotes_recovery_monitoring_version` (
 	CONSTRAINT `acv_et_ophcipostoperativenotes_recovery_monitoring_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_recovery_monitoring_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 	CONSTRAINT `acv_et_ophcipostoperativenotes_recovery_monitoring_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophcipostoperativenotes_recovery_monitoring_version','id','int(10) unsigned NOT NULL');
@@ -137,8 +137,8 @@ CREATE TABLE `et_ophcipostoperativenotes_recovery_monitoring_version` (
 		$this->execute("
 CREATE TABLE `ophcipostoperativenotes_drug_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(64) COLLATE utf8_bin NOT NULL,
-	`unit` varchar(16) COLLATE utf8_bin NOT NULL,
+	`name` varchar(64) NOT NULL,
+	`unit` varchar(16) NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -149,7 +149,7 @@ CREATE TABLE `ophcipostoperativenotes_drug_version` (
 	KEY `acv_ophcipostoperativenotes_drug_cui_fk` (`created_user_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_drug_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_drug_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_drug_version','id','int(10) unsigned NOT NULL');
@@ -169,7 +169,7 @@ CREATE TABLE `ophcipostoperativenotes_drug_dose_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`element_id` int(10) unsigned NOT NULL,
 	`item_id` int(10) unsigned NOT NULL,
-	`value` varchar(16) COLLATE utf8_bin NOT NULL,
+	`value` varchar(16) NOT NULL,
 	`offset` tinyint(1) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -184,7 +184,7 @@ CREATE TABLE `ophcipostoperativenotes_drug_dose_version` (
 	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_rt_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_drug` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_el_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_recovery_monitoring` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_drug_dose_version','id','int(10) unsigned NOT NULL');
@@ -202,10 +202,10 @@ CREATE TABLE `ophcipostoperativenotes_drug_dose_version` (
 		$this->execute("
 CREATE TABLE `ophcipostoperativenotes_gas_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(64) COLLATE utf8_bin NOT NULL,
+	`name` varchar(64) NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`field_type_id` int(10) unsigned NOT NULL,
-	`unit` varchar(16) COLLATE utf8_bin NOT NULL,
+	`unit` varchar(16) NOT NULL,
 	`min` tinyint(1) unsigned DEFAULT NULL,
 	`max` tinyint(1) unsigned DEFAULT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
@@ -219,7 +219,7 @@ CREATE TABLE `ophcipostoperativenotes_gas_version` (
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_lft_fk` FOREIGN KEY (`field_type_id`) REFERENCES `ophcipostoperativenotes_gas_field_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_gas_version','id','int(10) unsigned NOT NULL');
@@ -237,7 +237,7 @@ CREATE TABLE `ophcipostoperativenotes_gas_version` (
 		$this->execute("
 CREATE TABLE `ophcipostoperativenotes_gas_field_type_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(32) COLLATE utf8_bin NOT NULL,
+	`name` varchar(32) NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -248,7 +248,7 @@ CREATE TABLE `ophcipostoperativenotes_gas_field_type_version` (
 	KEY `acv_ophcipostoperativenotes_gas_ft_ft_cui_fk` (`created_user_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_ft_ft_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_ft_ft_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_gas_field_type_version','id','int(10) unsigned NOT NULL');
@@ -268,7 +268,7 @@ CREATE TABLE `ophcipostoperativenotes_gas_level_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`element_id` int(10) unsigned NOT NULL,
 	`item_id` int(10) unsigned NOT NULL,
-	`value` varchar(64) COLLATE utf8_bin NOT NULL,
+	`value` varchar(64) NOT NULL,
 	`offset` tinyint(1) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -283,7 +283,7 @@ CREATE TABLE `ophcipostoperativenotes_gas_level_version` (
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_level_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_level_el_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_recovery_monitoring` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_level_gai_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_gas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_gas_level_version','id','int(10) unsigned NOT NULL');
@@ -301,7 +301,7 @@ CREATE TABLE `ophcipostoperativenotes_gas_level_version` (
 		$this->execute("
 CREATE TABLE `ophcipostoperativenotes_medication_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(64) COLLATE utf8_bin NOT NULL,
+	`name` varchar(64) NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -312,7 +312,7 @@ CREATE TABLE `ophcipostoperativenotes_medication_version` (
 	KEY `acv_ophcipostoperativenotes_medication_cui_fk` (`created_user_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_medication_version','id','int(10) unsigned NOT NULL');
@@ -333,9 +333,9 @@ CREATE TABLE `ophcipostoperativenotes_medication_item_version` (
 	`element_id` int(10) unsigned NOT NULL,
 	`medication_id` int(10) unsigned NOT NULL,
 	`time` time NOT NULL,
-	`dose` varchar(64) COLLATE utf8_bin NOT NULL,
-	`route` varchar(64) COLLATE utf8_bin NOT NULL,
-	`given_by` varchar(64) COLLATE utf8_bin NOT NULL,
+	`dose` varchar(64) NOT NULL,
+	`route` varchar(64) NOT NULL,
+	`given_by` varchar(64) NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -350,7 +350,7 @@ CREATE TABLE `ophcipostoperativenotes_medication_item_version` (
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_item_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_item_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_medications` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_item_med_fk` FOREIGN KEY (`medication_id`) REFERENCES `ophcipostoperativenotes_medication` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_medication_item_version','id','int(10) unsigned NOT NULL');
@@ -371,7 +371,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_version` (
 	`element_id` int(10) unsigned NOT NULL,
 	`item_id` int(10) unsigned NOT NULL,
 	`reading_time` time NOT NULL,
-	`value` varchar(16) COLLATE utf8_bin NOT NULL,
+	`value` varchar(16) NOT NULL,
 	`offset` tinyint(1) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -386,7 +386,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_version` (
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_rt_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_reading_type` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_el_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_recovery_monitoring` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_reading_version','id','int(10) unsigned NOT NULL');
@@ -404,10 +404,10 @@ CREATE TABLE `ophcipostoperativenotes_reading_version` (
 		$this->execute("
 CREATE TABLE `ophcipostoperativenotes_reading_type_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(64) COLLATE utf8_bin NOT NULL,
-	`unit` varchar(32) COLLATE utf8_bin NOT NULL,
-	`validation_regex` varchar(64) COLLATE utf8_bin NOT NULL,
-	`validation_message` varchar(64) COLLATE utf8_bin NOT NULL,
+	`name` varchar(64) NOT NULL,
+	`unit` varchar(32) NOT NULL,
+	`validation_regex` varchar(64) NOT NULL,
+	`validation_message` varchar(64) NOT NULL,
 	`field_type_id` int(10) unsigned NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
@@ -421,7 +421,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_type_version` (
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_type_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_type_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_type_fti_fk` FOREIGN KEY (`field_type_id`) REFERENCES `ophcipostoperativenotes_reading_type_field_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_reading_type_version','id','int(10) unsigned NOT NULL');
@@ -439,7 +439,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_type_version` (
 		$this->execute("
 CREATE TABLE `ophcipostoperativenotes_reading_type_field_type_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(64) COLLATE utf8_bin NOT NULL,
+	`name` varchar(64) NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -450,7 +450,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_type_field_type_version` (
 	KEY `acv_ophcipostoperativenotes_reading_tft_cui_fk` (`created_user_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_tft_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_tft_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_reading_type_field_type_version','id','int(10) unsigned NOT NULL');
@@ -469,7 +469,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_type_field_type_version` (
 CREATE TABLE `ophcipostoperativenotes_reading_type_field_type_option_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`reading_type_id` int(10) unsigned NOT NULL,
-	`name` varchar(64) COLLATE utf8_bin NOT NULL,
+	`name` varchar(64) NOT NULL,
 	`display_order` int(10) unsigned NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -482,7 +482,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_type_field_type_option_version` (
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_tfto_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_tfto_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_tfto_fti_fk` FOREIGN KEY (`reading_type_id`) REFERENCES `ophcipostoperativenotes_reading_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophcipostoperativenotes_reading_type_field_type_option_version','id','int(10) unsigned NOT NULL');
