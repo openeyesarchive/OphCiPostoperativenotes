@@ -26,7 +26,7 @@
  * @property string $display_order
  */
 
-class OphCiPostoperativenotes_Drug extends BaseEventTypeElement
+class OphCiPostoperativenotes_Drug extends BaseActiveRecordVersionedSoftDelete
 {
 	/**
 	 * Returns the static model of the specified AR class.

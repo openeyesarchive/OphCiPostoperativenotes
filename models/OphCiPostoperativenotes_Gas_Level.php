@@ -29,7 +29,7 @@
  * @property string $value
  */
 
-class OphCiPostoperativenotes_Gas_Level extends BaseEventTypeElement
+class OphCiPostoperativenotes_Gas_Level extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

@@ -28,7 +28,7 @@
  * @property integer $display_order
  */
 
-class OphCiPostoperativenotes_Reading extends BaseEventTypeElement
+class OphCiPostoperativenotes_Reading extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

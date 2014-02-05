@@ -27,7 +27,7 @@
  * @property integer $field_type_id
  */
 
-class OphCiPostoperativenotes_Gas extends BaseEventTypeElement
+class OphCiPostoperativenotes_Gas extends BaseActiveRecordVersionedSoftDelete
 {
 	/**
 	 * Returns the static model of the specified AR class.

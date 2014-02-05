@@ -26,7 +26,7 @@
  * @property integer $display_order
  */
 
-class OphCiPostoperativenotes_Medication extends BaseEventTypeElement
+class OphCiPostoperativenotes_Medication extends BaseActiveRecordVersionedSoftDelete
 {
 	public $service;
 

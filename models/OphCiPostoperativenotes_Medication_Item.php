@@ -31,7 +31,7 @@
  * @property integer $display_order
  */
 
-class OphCiPostoperativenotes_Medication_Item extends BaseEventTypeElement
+class OphCiPostoperativenotes_Medication_Item extends BaseActiveRecordVersioned
 {
 	public $service;
 
