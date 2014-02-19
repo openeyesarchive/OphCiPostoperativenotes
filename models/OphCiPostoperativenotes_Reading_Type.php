@@ -101,16 +101,5 @@ class OphCiPostoperativenotes_Reading_Type extends BaseActiveRecordVersionedSoft
 			'criteria' => $criteria,
 		));
 	}
-
-	public function getUnitAttributes()
-	{
-		$attributes = array();
-
-		foreach (OphCiPostoperativenotes_Reading_Type::model()->findAll() as $type) {
-			$attributes[$type->id] = array('data-attr-unit' => $type->unit);
-		}
-
-		return $attributes;
-	}
 }
 ?>

@@ -20,7 +20,7 @@
 
 <tr>
 	<td><?php echo CHtml::textField('time[]',$medication->time,array('size'=>12))?></td>
-	<td><?php echo CHtml::dropDownList('medication_id[]',$medication->medication_id,CHtml::listData(OphCiPostoperativenotes_Medication::model()->findAll(array('order'=>'display_order asc')),'id','name'),array('empty'=>'- Select -'))?></td>
+	<td><?php echo CHtml::dropDownList('medication_id[]',$medication->medication_id,CHtml::listData(OphCiPostoperativenotes_Medication::model()->notDeletedOrPk($medication->medication_id)->findAll(array('order'=>'display_order asc')),'id','name'),array('empty'=>'- Select -'))?></td>
 	<td><?php echo CHtml::textField('dose[]',$medication->dose,array('size'=>12))?></td>
 	<td><?php echo CHtml::textField('route[]',$medication->route,array('size'=>12))?></td>
 	<td><?php echo CHtml::textField('given_by[]',$medication->given_by,array('size'=>12))?></td>

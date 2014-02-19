@@ -75,6 +75,7 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'gas_levels' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Gas_Level', 'element_id' => 'order' => 'display_order'),
 			'drugs' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Drug_Dose', 'element_id', 'order' => 'display_order'),
 			'readings' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Reading', 'element_id', 'order' => 'display_order'),
 		);
@@ -201,6 +202,48 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 		}
 
 		return parent::beforeValidate();
+	}
+
+	/**
+	 * Get gas ids in use by the element
+	 */
+	public function getGasValues()
+	{
+		$gas_values = array();
+
+		foreach ($this->gas_levels as $gas_level) {
+			$gas_values[] = $gas_level->item_id;
+		}
+
+		return $gas_values;
+	}
+
+	/**
+	 * Get drug ids in use by the element
+	 */
+	public function getDrugValues()
+	{
+		$drug_values = array();
+
+		foreach ($this->drugs as $drug) {
+			$drug_values[] = $drug->item_id;
+		}
+
+		return $drug_values;
+	}
+
+	/**
+	 * Get reading type ids in use by the element
+	 */
+	public function getReadingTypeValues()
+	{
+		$reading_type_values = array();
+
+		foreach ($this->readings as $reading) {
+			$reading_type_values[] = $reading->item_id;
+		}
+
+		return $reading_type_values;
 	}
 }
 ?>
