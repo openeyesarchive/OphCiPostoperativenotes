@@ -75,7 +75,7 @@ class Element_OphCiPostoperativenotes_RecoveryMonitoring extends BaseEventTypeEl
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'gas_levels' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Gas_Level', 'element_id' => 'order' => 'display_order'),
+			'gas_levels' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Gas_Level', 'element_id', 'order' => 'display_order'),
 			'drugs' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Drug_Dose', 'element_id', 'order' => 'display_order'),
 			'readings' => array(self::HAS_MANY, 'OphCiPostoperativenotes_Reading', 'element_id', 'order' => 'display_order'),
 		);
