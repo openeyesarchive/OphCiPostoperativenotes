@@ -182,8 +182,7 @@ CREATE TABLE `ophcipostoperativenotes_drug_dose_version` (
 	KEY `acv_ophcipostoperativenotes_drug_dose_el_fk` (`element_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
-	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_rt_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_drug` (`id`),
-	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_el_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_recovery_monitoring` (`id`)
+	CONSTRAINT `acv_ophcipostoperativenotes_drug_dose_rt_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_drug` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
@@ -281,7 +280,6 @@ CREATE TABLE `ophcipostoperativenotes_gas_level_version` (
 	KEY `acv_ophcipostoperativenotes_gas_level_gai_fk` (`item_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_level_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_level_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
-	CONSTRAINT `acv_ophcipostoperativenotes_gas_level_el_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_recovery_monitoring` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_gas_level_gai_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_gas` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
@@ -348,7 +346,6 @@ CREATE TABLE `ophcipostoperativenotes_medication_item_version` (
 	KEY `acv_ophcipostoperativenotes_medication_item_med_fk` (`medication_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_item_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_item_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
-	CONSTRAINT `acv_ophcipostoperativenotes_medication_item_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_medications` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_medication_item_med_fk` FOREIGN KEY (`medication_id`) REFERENCES `ophcipostoperativenotes_medication` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
@@ -384,8 +381,7 @@ CREATE TABLE `ophcipostoperativenotes_reading_version` (
 	KEY `acv_ophcipostoperativenotes_reading_el_fk` (`element_id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophcipostoperativenotes_reading_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
-	CONSTRAINT `acv_ophcipostoperativenotes_reading_rt_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_reading_type` (`id`),
-	CONSTRAINT `acv_ophcipostoperativenotes_reading_el_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophcipostoperativenotes_recovery_monitoring` (`id`)
+	CONSTRAINT `acv_ophcipostoperativenotes_reading_rt_fk` FOREIGN KEY (`item_id`) REFERENCES `ophcipostoperativenotes_reading_type` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
